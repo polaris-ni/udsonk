@@ -1,7 +1,7 @@
-package com.lyni.com.polaris.udsonk.transport.impl
+package com.lyni.udsonk.protocol.transport.impl
 
-import com.lyni.com.polaris.udsonk.exceptions.ConnectionException
-import com.lyni.com.polaris.udsonk.transport.TransportInterface
+import com.lyni.udsonk.protocol.exceptions.ConnectionException
+import com.lyni.udsonk.protocol.transport.TransportInterface
 import java.io.Closeable
 import java.io.IOException
 import java.io.InputStream
@@ -106,11 +106,9 @@ class SocketTransport(
 
         return try {
             val buffer = ByteArray(config.bufferSize)
-            val bytesRead = inputStream!!.read(buffer)
-
-            when {
-                bytesRead == -1 -> throw ConnectionException("Connection closed")
-                bytesRead == 0 -> ByteArray(0)
+            when (val bytesRead = inputStream!!.read(buffer)) {
+                -1 -> throw ConnectionException("Connection closed")
+                0 -> ByteArray(0)
                 else -> buffer.copyOf(bytesRead)
             }
         } catch (e: IOException) {

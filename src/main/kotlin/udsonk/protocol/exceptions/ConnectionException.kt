@@ -1,4 +1,4 @@
-package com.lyni.com.polaris.udsonk.exceptions
+package com.lyni.udsonk.protocol.exceptions
 
 import java.net.InetSocketAddress
 

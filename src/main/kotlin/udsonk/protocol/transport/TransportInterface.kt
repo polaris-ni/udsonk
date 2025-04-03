@@ -1,4 +1,4 @@
-package com.lyni.com.polaris.udsonk.transport
+package com.lyni.udsonk.protocol.transport
 
 import java.io.Closeable
 
