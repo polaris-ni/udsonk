@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.tinylog:tinylog-api-kotlin:2.8.0-M1")
+    implementation("org.tinylog:tinylog-impl:2.8.0-M1")
 }
 
 tasks.test {
