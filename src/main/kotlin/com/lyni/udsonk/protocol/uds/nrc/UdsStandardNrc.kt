@@ -1,7 +1,7 @@
 package com.lyni.udsonk.protocol.uds.nrc
 
 enum class UdsStandardNrc(
-    override val nrc: Byte,
+    override val value: Byte,
     override val hexString: String,
     override val info: String,
     override val desc: String,

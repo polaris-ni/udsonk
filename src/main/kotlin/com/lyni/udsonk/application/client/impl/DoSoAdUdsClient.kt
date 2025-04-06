@@ -6,6 +6,7 @@ import com.lyni.udsonk.common.util.NumberExtensions
 import com.lyni.udsonk.common.util.NumberExtensions.byteOf
 import com.lyni.udsonk.common.util.NumberExtensions.highByte
 import com.lyni.udsonk.common.util.NumberExtensions.lowByte
+import com.lyni.udsonk.protocol.exceptions.InvalidResponseException
 import com.lyni.udsonk.protocol.transport.impl.SocketTransport
 import com.lyni.udsonk.protocol.uds.UdsConstants
 import com.lyni.udsonk.protocol.uds.services.UdsServiceInterface
@@ -57,7 +58,7 @@ class DoSoAdUdsClient(testerAddress: Short, targetAddress: Short, socketConfig: 
             val rcvSrcAddr = NumberExtensions.shortValueOf(resp.get(), resp.get())
             val rcvDestAddr = NumberExtensions.shortValueOf(resp.get(), resp.get())
             if ((rcvSrcAddr != context.targetAddress) || (rcvDestAddr != context.testerAddress)) {
-                throw com.lyni.udsonk.protocol.exceptions.InvalidResponseException(
+                throw InvalidResponseException(
                     service.service,
                     context.testerAddress,
                     context.targetAddress,
@@ -67,11 +68,7 @@ class DoSoAdUdsClient(testerAddress: Short, targetAddress: Short, socketConfig: 
             }
             val length = NumberExtensions.intValueOf(resp.get(), resp.get(), resp.get(), resp.get())
             if (length + HEADER_SIZE != resp.limit()) {
-                throw com.lyni.udsonk.protocol.exceptions.InvalidResponseException(
-                    service.service,
-                    length + HEADER_SIZE,
-                    resp.limit()
-                )
+                throw InvalidResponseException(service.service, length + HEADER_SIZE, resp.limit())
             }
             handleResponse(service, resp)
         } catch (e: Exception) {

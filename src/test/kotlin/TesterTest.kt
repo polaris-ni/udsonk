@@ -2,7 +2,7 @@ import com.lyni.udsonk.application.client.impl.DoSoAdUdsClient
 import com.lyni.udsonk.common.util.NumberExtensions
 import com.lyni.udsonk.protocol.transport.impl.SocketTransport
 import com.lyni.udsonk.protocol.uds.UdsConstants
-import com.lyni.udsonk.protocol.uds.services.impl.DiagnosticSessionControl
+import com.lyni.udsonk.protocol.uds.services.standard.DiagnosticSessionControl
 import com.lyni.udsonk.protocol.uds.session.UdsStandardSession
 import org.tinylog.kotlin.Logger
 import java.net.ServerSocket

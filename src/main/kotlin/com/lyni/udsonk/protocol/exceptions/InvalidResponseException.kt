@@ -1,10 +1,10 @@
 package com.lyni.udsonk.protocol.exceptions
 
-import com.lyni.udsonk.protocol.uds.services.UdsServices
+import com.lyni.udsonk.protocol.uds.services.UdsService
 
 class InvalidResponseException(msg: String) : UdsException(msg) {
     constructor(
-        service: UdsServices,
+        service: UdsService,
         testerAddr: Short,
         targetAddr: Short,
         rcvSrcAddr: Short,
@@ -16,7 +16,7 @@ class InvalidResponseException(msg: String) : UdsException(msg) {
     )
 
     constructor(
-        service: UdsServices,
+        service: UdsService,
         length: Int,
         totalLength: Int
     ) : this("service ${service.desc} receive response length error, parse length is $length, but $totalLength received")
