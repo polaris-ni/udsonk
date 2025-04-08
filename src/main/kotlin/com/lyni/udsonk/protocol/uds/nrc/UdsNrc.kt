@@ -6,7 +6,6 @@ import com.lyni.udsonk.protocol.uds.UdsDefine
 interface UdsNrc : UdsDefine {
     val hexString: String
     val info: String
-    val desc: String
     val mnemonic: String
 
     companion object {

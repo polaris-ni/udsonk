@@ -6,7 +6,6 @@ import com.lyni.udsonk.protocol.uds.UdsDefine
 
 interface UdsSession : UdsDefine {
     val info: String
-    val desc: String
     val cvt: UdsCvtType
     val mnemonic: String
 

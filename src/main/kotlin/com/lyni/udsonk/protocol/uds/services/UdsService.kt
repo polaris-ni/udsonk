@@ -4,7 +4,6 @@ import com.lyni.udsonk.common.io.UdsDefinesCache
 import com.lyni.udsonk.protocol.uds.UdsDefine
 
 interface UdsService : UdsDefine {
-    val desc: String
     val serviceType: UdsServiceType
     val isoReference: String
 
