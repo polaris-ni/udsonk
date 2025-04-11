@@ -3,9 +3,8 @@ package com.lyni.udsonk.protocol.uds.services
 import com.lyni.udsonk.common.io.UdsDefinesCache
 import com.lyni.udsonk.protocol.uds.UdsDefine
 
-interface UdsService : UdsDefine {
+interface UdsService : UdsDefine<Byte> {
     val serviceType: UdsServiceType
-    val isoReference: String
 
     companion object {
 

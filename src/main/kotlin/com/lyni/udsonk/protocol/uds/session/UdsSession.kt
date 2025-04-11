@@ -4,7 +4,7 @@ import com.lyni.udsonk.common.io.UdsDefinesCache
 import com.lyni.udsonk.protocol.uds.UdsCvtType
 import com.lyni.udsonk.protocol.uds.UdsDefine
 
-interface UdsSession : UdsDefine {
+interface UdsSession : UdsDefine<Byte> {
     val info: String
     val cvt: UdsCvtType
     val mnemonic: String

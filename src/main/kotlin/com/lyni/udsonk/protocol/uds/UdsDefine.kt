@@ -1,6 +1,6 @@
 package com.lyni.udsonk.protocol.uds
 
-interface UdsDefine {
-    val value: Byte
+interface UdsDefine<T> {
+    val value: T
     val desc: String
 }

@@ -3,7 +3,7 @@ package com.lyni.udsonk.protocol.uds.nrc
 import com.lyni.udsonk.common.io.UdsDefinesCache
 import com.lyni.udsonk.protocol.uds.UdsDefine
 
-interface UdsNrc : UdsDefine {
+interface UdsNrc : UdsDefine<Byte> {
     val hexString: String
     val info: String
     val mnemonic: String
