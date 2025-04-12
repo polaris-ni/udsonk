@@ -1,3 +1,4 @@
+@file:JvmName("UdsConstants")
 package com.lyni.udsonk.protocol.uds
 
 object UdsConstants {

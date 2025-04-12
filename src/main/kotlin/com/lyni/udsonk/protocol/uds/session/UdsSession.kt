@@ -10,10 +10,12 @@ interface UdsSession : UdsDefine<Byte> {
     val mnemonic: String
 
     companion object {
-        private val cache = UdsDefinesCache<UdsSession>(UdsStandardSession.entries)
+        private val cache = UdsDefinesCache<Byte, UdsSession>(UdsStandardSession.entries)
 
+        @JvmStatic
         fun valueOf(session: Byte): UdsSession? = cache.valueOf(session)
 
+        @JvmStatic
         fun registerSession(session: UdsSession) = cache.put(session)
     }
 }

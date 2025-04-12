@@ -10,6 +10,8 @@ build/
 .idea/compiler.xml
 .idea/libraries/
 .idea/workspace.xml
+.idea/CopilotChatHistory.xml
+.idea/CopilotWebChatHistory.xml
 *.iws
 *.iml
 *.ipr

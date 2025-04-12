@@ -4,8 +4,8 @@ import com.lyni.udsonk.protocol.uds.UdsDefine
 import org.tinylog.kotlin.Logger
 import java.util.concurrent.ConcurrentHashMap
 
-class UdsDefinesCache<T : UdsDefine>(list: List<T>) {
-    private val cache = ConcurrentHashMap<Byte, T>()
+class UdsDefinesCache<V, T : UdsDefine<V>>(list: List<T>) {
+    private val cache = ConcurrentHashMap<V, T>()
 
     init {
         list.forEach {
@@ -13,7 +13,7 @@ class UdsDefinesCache<T : UdsDefine>(list: List<T>) {
         }
     }
 
-    fun valueOf(value: Byte): T? {
+    fun valueOf(value: V): T? {
         return cache[value]
     }
 

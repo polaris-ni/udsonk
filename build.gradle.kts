@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.0-M2")
     implementation("org.tinylog:tinylog-api-kotlin:2.8.0-M1")
     implementation("org.tinylog:tinylog-impl:2.8.0-M1")
 }

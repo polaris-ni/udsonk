@@ -1,3 +1,4 @@
+@file:JvmName("NumberExtensions")
 package com.lyni.udsonk.common.io
 
 import java.nio.ByteBuffer
@@ -8,6 +9,7 @@ object DirectBufferPool {
 
     private val pool = LinkedList<ByteBuffer>()
 
+    @JvmStatic
     fun allocate(size: Int): ByteBuffer {
         pool.forEach {
             if (it.capacity() >= size) {
@@ -18,6 +20,7 @@ object DirectBufferPool {
         return ByteBuffer.allocate(size)
     }
 
+    @JvmStatic
     fun release(buffer: ByteBuffer) {
         if (pool.size < MAX_POOL_SIZE) {
             pool.addLast(buffer)

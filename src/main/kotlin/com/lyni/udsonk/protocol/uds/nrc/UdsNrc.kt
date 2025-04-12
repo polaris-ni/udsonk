@@ -9,10 +9,12 @@ interface UdsNrc : UdsDefine<Byte> {
     val mnemonic: String
 
     companion object {
-        private val cache = UdsDefinesCache<UdsNrc>(UdsStandardNrc.entries)
+        private val cache = UdsDefinesCache<Byte, UdsNrc>(UdsStandardNrc.entries)
 
+        @JvmStatic
         fun valueOf(nrc: Byte): UdsNrc? = cache.valueOf(nrc)
 
+        @JvmStatic
         fun registerNrc(nrc: UdsNrc) = cache.put(nrc)
     }
 }

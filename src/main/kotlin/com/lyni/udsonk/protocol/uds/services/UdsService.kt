@@ -8,10 +8,12 @@ interface UdsService : UdsDefine<Byte> {
 
     companion object {
 
-        private val cache = UdsDefinesCache<UdsService>(UdsStandardService.entries)
+        private val cache = UdsDefinesCache<Byte, UdsService>(UdsStandardService.entries)
 
+        @JvmStatic
         fun valueOf(service: Byte): UdsService? = cache.valueOf(service)
 
+        @JvmStatic
         fun registerService(service: UdsService) = cache.put(service)
     }
 }
