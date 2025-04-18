@@ -10,14 +10,14 @@ object DirectBufferPool {
     private val pool = LinkedList<ByteBuffer>()
 
     @JvmStatic
-    fun allocate(size: Int): ByteBuffer {
+    fun allocate(size: Long): ByteBuffer {
         pool.forEach {
             if (it.capacity() >= size) {
                 pool.remove(it)
-                return it.clear().limit(size)
+                return it.clear().limit(size.toInt())
             }
         }
-        return ByteBuffer.allocate(size)
+        return ByteBuffer.allocate(size.toInt())
     }
 
     @JvmStatic
