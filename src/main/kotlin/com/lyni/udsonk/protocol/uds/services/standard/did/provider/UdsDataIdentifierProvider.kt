@@ -1,6 +1,7 @@
-package com.lyni.udsonk.protocol.uds.services.standard.did
+package com.lyni.udsonk.protocol.uds.services.standard.did.provider
 
 import com.lyni.udsonk.application.client.UdsClientContext
+import com.lyni.udsonk.protocol.uds.services.standard.did.UdsDataIdentifier
 
 /**
  * Uds data identifier provider
@@ -15,5 +16,3 @@ interface UdsDataIdentifierProvider {
      */
     fun provide(context: UdsClientContext, did: UdsDataIdentifier): ByteArray
 }
-
-
