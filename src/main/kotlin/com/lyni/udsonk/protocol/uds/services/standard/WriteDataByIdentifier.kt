@@ -6,20 +6,33 @@ import com.lyni.udsonk.common.util.NumberExtensions
 import com.lyni.udsonk.common.util.NumberExtensions.highByte
 import com.lyni.udsonk.common.util.NumberExtensions.lowByte
 import com.lyni.udsonk.protocol.exceptions.InvalidResponseException
+import com.lyni.udsonk.protocol.exceptions.UdsParamException
 import com.lyni.udsonk.protocol.uds.services.UdsService
 import com.lyni.udsonk.protocol.uds.services.UdsServiceInterface
 import com.lyni.udsonk.protocol.uds.services.UdsStandardService
 import com.lyni.udsonk.protocol.uds.services.standard.did.UdsDataIdentifier
-import com.lyni.udsonk.protocol.uds.services.standard.did.UdsDataIdentifierProvider
+import com.lyni.udsonk.protocol.uds.services.standard.did.provider.UdsDataIdentifierProvider
 import org.tinylog.kotlin.Logger
 import java.nio.ByteBuffer
 
-class WriteDataByIdentifier(private val did: UdsDataIdentifier, private val provider: UdsDataIdentifierProvider) :
-    UdsServiceInterface {
-    override val service: UdsService
-        get() = UdsStandardService.SID_2E_WRITE_DATA_BY_IDENTIFIER
+class WriteDataByIdentifier(private val did: UdsDataIdentifier, payload: ByteArray? = null) : UdsServiceInterface {
 
     lateinit var data: ByteArray
+
+    init {
+        if (payload != null) {
+            data = payload
+        }
+    }
+
+    private var provider: UdsDataIdentifierProvider? = null
+
+    constructor(did: UdsDataIdentifier, provider: UdsDataIdentifierProvider) : this(did, null) {
+        this.provider = provider
+    }
+
+    override val service: UdsService
+        get() = UdsStandardService.SID_2E_WRITE_DATA_BY_IDENTIFIER
 
     /**
      * Request message definition
@@ -40,7 +53,10 @@ class WriteDataByIdentifier(private val did: UdsDataIdentifier, private val prov
      */
     override fun getRequestSize(context: UdsClientContext): SizeRange {
         if (!::data.isInitialized) {
-            data = provider.provide(context, did)
+            if (provider == null) {
+                throw UdsParamException("did data is null, and no provider found")
+            }
+            data = provider!!.provide(context, did)
         }
         return SizeRange(3 + data.size)
     }
@@ -72,7 +88,9 @@ class WriteDataByIdentifier(private val did: UdsDataIdentifier, private val prov
         buf.get()
         val respDid = NumberExtensions.shortValueOf(buf.get(), buf.get())
         if (respDid != did.value) {
-            throw InvalidResponseException("response did 0x%02X is not equal to request did 0x%02X".format(respDid, did.value))
+            throw InvalidResponseException(
+                "response did 0x%02X and request did 0x%02X are not equal".format(respDid, did.value)
+            )
         }
         Logger.info("WriteDataByIdentifier success, did is 0x%02X".format(did.value))
     }
