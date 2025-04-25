@@ -10,6 +10,11 @@ enum class UdsStandardService(
         "DiagnosticSessionControl",
         UdsServiceType.DIAGNOSTIC_AND_COMMUNICATION_MANAGEMENT
     ),
+    SID_11_ECU_RESET(
+        0x11,
+        "ECUReset",
+        UdsServiceType.DIAGNOSTIC_AND_COMMUNICATION_MANAGEMENT
+    ),
     SID_2E_WRITE_DATA_BY_IDENTIFIER(
         0x2E,
         "WriteDataByIdentifier",

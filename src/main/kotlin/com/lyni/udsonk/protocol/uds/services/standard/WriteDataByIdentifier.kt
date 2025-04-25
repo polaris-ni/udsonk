@@ -17,12 +17,10 @@ import java.nio.ByteBuffer
 
 class WriteDataByIdentifier(private val did: UdsDataIdentifier, payload: ByteArray? = null) : UdsServiceInterface {
 
-    lateinit var data: ByteArray
+    private var data: ByteArray? = null
 
     init {
-        if (payload != null) {
-            data = payload
-        }
+        data = payload
     }
 
     private var provider: UdsDataIdentifierProvider? = null
@@ -52,13 +50,13 @@ class WriteDataByIdentifier(private val did: UdsDataIdentifier, payload: ByteArr
      * @see [UdsDataIdentifier](com.lyni.udsonk.protocol.uds.services.standard.did.UdsDataIdentifier)
      */
     override fun getRequestSize(context: UdsClientContext): SizeRange {
-        if (!::data.isInitialized) {
+        if (data == null) {
             if (provider == null) {
                 throw UdsParamException("did data is null, and no provider found")
             }
             data = provider!!.provide(context, did)
         }
-        return SizeRange(3 + data.size)
+        return SizeRange(3 + data!!.size)
     }
 
     /**
